@@ -1,8 +1,9 @@
 <template>
   <div id="login">
+    <h1>Hello !</h1>
     <input type="text" placeholder="Email" />
     <input type="password" placeholder="Password" />
-    <button>Connection</button>    
+    <button>Connection</button>        
   </div>
 </template>
 
