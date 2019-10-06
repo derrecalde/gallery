@@ -22,11 +22,6 @@ export default {
 
   data(){
     return {items: gallery.state.store}
-  },
-
-  mounted (){
-    // Call database from storage
-    
   }
 
 }

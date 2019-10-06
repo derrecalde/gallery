@@ -4,27 +4,45 @@ import { db } from './config';
 class GalleryStorage {
   constructor(){
     this.state = {
-      store : []
+      store : [],
+      name: 'paints'
     }
   }
 
-  // Get Paintings data
+  // Get gallery data from Firebase ddb
   getGallery (){
-     db.collection('paints').get().then( (snapshot)=>{     
+     db.collection(this.state.name).get().then( (snapshot)=>{     
 
-      snapshot.docs.forEach(item => {          
-        this.state.store.push(item.data()) // Push each data in the state.paintings store
+      snapshot.docs.forEach(item => {      
+
+        let data = item.data()
+        data.id  = item.id
+
+        this.state.store.push(data)        // Push each data in the state.paintings store
       });
-
     })      
   }
 
-  addInGallery(el){
-    db.collection('paints').add(el)
+  // Add data in Firebase ddb
+  addIn(el){    
+
+    db.collection(this.state.name).add(el) // Add in Firebase
+    this.state.store.push(el)              // Add in store
+  }
+
+  // Remove a data by id
+  removeIn(id){
+
+    // Remove from firebase    
+    db.collection(this.state.name).doc(id).delete();
+
+    // -- Remove from the store -- //    
+    let index = this.state.store.findIndex( x => x.id ===id);    
+    if (index > -1) this.state.store.splice(index, 1);    
+    // -- //    
   }
 
 }
-
 
 
 // Init a storage
