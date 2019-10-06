@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { paintings } from '../storage';
+import { gallery } from '../storage';
 
 
 // import Gallery from './gallery/Gallery.vue'
@@ -21,7 +21,7 @@ export default {
   name: 'app',
 
   data(){
-    return {items: paintings.state.paintings}
+    return {items: gallery.state.store}
   },
 
   mounted (){

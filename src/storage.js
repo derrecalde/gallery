@@ -1,22 +1,26 @@
 
 import { db } from './config';
 
-class PaintStorage {
+class GalleryStorage {
   constructor(){
     this.state = {
-      paintings : []
+      store : []
     }
   }
 
-  // Get Paintings
-  getPaintings (){
+  // Get Paintings data
+  getGallery (){
      db.collection('paints').get().then( (snapshot)=>{     
 
       snapshot.docs.forEach(item => {          
-        this.state.paintings.push(item.data()) // Push each data in the state.paintings store
+        this.state.store.push(item.data()) // Push each data in the state.paintings store
       });
 
     })      
+  }
+
+  addInGallery(el){
+    db.collection('paints').add(el)
   }
 
 }
@@ -24,10 +28,10 @@ class PaintStorage {
 
 
 // Init a storage
-export const paintings = new PaintStorage();
+export const gallery = new GalleryStorage();
 
 // Get data from firebase
-paintings.getPaintings()
+gallery.getGallery()
 
 // console.log(paints.getPaints())
 // console.log(paints.state)
