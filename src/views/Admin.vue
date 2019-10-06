@@ -21,17 +21,17 @@
 
 <script>
 import LogOut from './LogOut'
-import { gallery } from '../storage';
+import { galleryStore } from '../storage';
 
 export default {
   name: 'admin',
 
-  components: {LogOut},
+  components: { LogOut },
   data (){
     return {
-      title: '',
-      url: '',
-      gallery: []
+      title   : '',
+      url     : '',
+      gallery : []
     }
   },
 
@@ -39,7 +39,7 @@ export default {
     // -- Add data -- //
     addFile(){
       
-      gallery.addIn({
+      galleryStore.addIn({
         title: this.title,
         url:   this.url
       })
@@ -52,14 +52,14 @@ export default {
     removeFile(e){
 
       let id = e.target.getAttribute('data-id')      
-      gallery.removeIn(id)
+      galleryStore.removeIn(id)
       
     }
     // -- //
   },
 
   mounted() {    
-    this.gallery = gallery.state.store
+    this.gallery = galleryStore.state.store
   }
 
 }

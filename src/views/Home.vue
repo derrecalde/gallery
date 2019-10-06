@@ -1,15 +1,15 @@
 <template>
   <div id="home">    
-    <HelloWorld/>    
+    <Gallery/>    
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import Gallery from '@/components/Gallery.vue'
 
 export default {
   name: 'home',
-  components: {HelloWorld},
+  components: {Gallery},
   data (){
     return {}
   }

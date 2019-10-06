@@ -46,10 +46,10 @@ class GalleryStorage {
 
 
 // Init a storage
-export const gallery = new GalleryStorage();
+export const galleryStore = new GalleryStorage();
 
 // Get data from firebase
-gallery.getGallery()
+galleryStore.getGallery()
 
 // console.log(paints.getPaints())
 // console.log(paints.state)
