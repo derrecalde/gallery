@@ -5,11 +5,11 @@ import "firebase/firestore";
 
 
  let config = {
-  apiKey: "**",
-  authDomain: "**",
-  databaseURL: "**",
-  projectId: "**",
-  storageBucket: "**"    
+  apiKey: "*",
+  authDomain: "*",
+  databaseURL: "*",
+  projectId: "*",
+  storageBucket: "*"    
 };
 let app = firebase.initializeApp(config);
 
