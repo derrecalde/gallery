@@ -1,5 +1,5 @@
 
-import { db } from './config';
+import { db, firebase } from './config';
 
 class GalleryStorage {
   constructor(){
@@ -26,8 +26,13 @@ class GalleryStorage {
   // Add data in Firebase ddb
   addIn(el){    
 
-    db.collection(this.state.name).add(el) // Add in Firebase
-    this.state.store.push(el)              // Add in store
+    this.state.store.push(el)              // Add in store to it instantly
+
+    return db.collection(this.state.name).add(el).then( (data) => {     
+        return data.id                     // return the created id         
+      })
+
+    
   }
 
   // Remove a data by id
@@ -37,9 +42,25 @@ class GalleryStorage {
     db.collection(this.state.name).doc(id).delete();
 
     // -- Remove from the store -- //    
-    let index = this.state.store.findIndex( x => x.id ===id);    
+    let index = this.state.store.findIndex( x => x.id === id);    
     if (index > -1) this.state.store.splice(index, 1);    
     // -- //    
+  }
+
+  uploadFile(file, createdId){    
+    
+    let fileName = file.name
+    let ext      = fileName.slice( fileName.lastIndexOf('.') )
+        
+    // Add in firebase storage    
+    let storageRef = firebase.storage().ref()
+    let imagesRef  = storageRef.child('gallery/'+createdId+ext)
+
+    imagesRef.put(file).then(function(snapshot) {
+      console.log(file)
+      console.log('Uploaded !');
+    });
+    
   }
 
 }
