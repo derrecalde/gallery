@@ -87,6 +87,12 @@ export default {
 
     // -- Get file data -- //
     onPickFile(e){
+      // -- Reset the dialog box rendering -- //
+      this.uploadState = false                // set Upload state to false
+      this.$refs.uploading.innerHTML = ""     // Add content text on uploading state
+      // -- //
+      
+
       let files = e.target.files
       $file = files[0]
       

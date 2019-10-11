@@ -1,11 +1,12 @@
 
-import { db, firebase } from './config';
+import { config, db, firebase } from './config';
 import { exists } from 'fs';
 
 class GalleryStorage {
   constructor(){
     this.state = {
       store : [],
+      images: [],
       collection: 'gallery',
       uploadState: false
     }
@@ -22,10 +23,39 @@ class GalleryStorage {
 
         this.state.store.push(data)        // Push each data in the state.paintings store
       });
-    })      
+    })
+          
   }
   // -- //
 
+  async buildImages(){
+    
+    var storage = firebase.storage();    
+    var store   = this.state.store        
+        
+    store.forEach(element => { 
+      let urls = {}      
+      
+      storage.refFromURL('gs://'+config.storageBucket+'/gallery/'+element.id+'.jpg').getDownloadURL().then(
+        (res)=>{
+          urls.urlOrigin = res
+        }
+      )
+
+      storage.refFromURL('gs://'+config.storageBucket+'/gallery/resized/'+element.id+'_300x300.jpg').getDownloadURL().then(
+        (res)=>{          
+          urls.urlResized = res
+        }
+      )
+      
+      urls.id    = element.id         // Add the id
+      urls.title = element.title      // Add the title
+      urls.type  = element.type       // Add the title
+      this.state.images.push(urls)    // Add urls
+      
+    })        
+   
+  }
 
   // -- Add data in Firebase ddb -- //
   addIn(el){    
@@ -78,6 +108,7 @@ class GalleryStorage {
   }
   // -- //
 
+  
   // -- Uploading file in Firebase Storage -- //
   async uploadFile(file, createdId){    
              
