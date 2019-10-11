@@ -49,6 +49,31 @@ class GalleryStorage {
     // Remove from the store to see it instantly
     let index = this.state.store.findIndex( x => x.id === id);    
     if (index > -1) this.state.store.splice(index, 1);    
+
+    // -- Remove frome Firebase storage -- //
+    let ext = '.jpg'
+    // Get the firebase Storage bucket and file name
+    let storageRef      = firebase.storage().ref()                                // Get the bucket storage
+    let imageRef        = storageRef.child('gallery/'+id+ext)                     // Get the original file
+    let resizedImageRef = storageRef.child('gallery/resized/'+id+'_300x300'+ext)  // Get the resized file
+    
+    // Deleting
+    // Delete the file
+    imageRef.delete().then(function() {      
+      console.log('File deleted successfully!')
+    }).catch(function(error) {
+      console.log('Uh-oh, an error occurred!')
+      console.log(error)    
+    });
+
+    // Delete the resized file
+    resizedImageRef.delete().then(function() {      
+      console.log('Resized file deleted successfully!')
+    }).catch(function(error) {
+      console.log('Uh-oh, an error occurred on resized file!')   
+      console.log(error)
+    });
+    // -- //
     
   }
   // -- //
