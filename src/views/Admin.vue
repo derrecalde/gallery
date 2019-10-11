@@ -3,11 +3,12 @@
     <h1>Admin !</h1>
     <LogOut></LogOut> 
 
-    <input type="text" v-model="title" placeholder="File" />
-    <input type="text" v-model="url" placeholder="Url" />
+    <input type="text" v-model="title" placeholder="Title" />
+    <input type="text" v-model="type" placeholder="Type" />
     <button @click="uploadFile" >Upload File</button>
-    <input type="file" ref="fileUploader" style="display:none;" accept="images/*" @change="onPickFile"  />
-    <button @click="addFile" >Add</button>          
+    <input type="file" ref="fileUploader" style="display:none;" accept="images/*" @change="onPickFile"  />    
+    <button @click="addFile" >Add</button>     
+    <p v-show="!uploadState" ref="uploading" ></p>
 
     <hr/>
 
@@ -18,6 +19,7 @@
       </li>
     </ul>    
 
+
   </div>
 </template>
 
@@ -27,6 +29,7 @@ import { galleryStore } from '../storage';
 
 let $file = []
 
+
 export default {
   name: 'admin',
 
@@ -34,8 +37,8 @@ export default {
   data (){
     return {
       title   : '',
-      url     : '',
-      file   : '',      
+      type    : '',
+      uploadState  : false,       
       gallery : []
     }
   },
@@ -46,16 +49,20 @@ export default {
 
       let data = {
         title: this.title,
-        url:   this.url,
-        file:  this.file
+        type : this.type
       }
-
       
-      galleryStore.addIn(data).then( (createdId)=>{     // Add data in firebase ddb and get his created id
-        
-        galleryStore.uploadFile($file, createdId)       // Uploading file in Firebase Storage
-        
+      galleryStore.addIn(data).then( (createdId)=>{     // Add data in firebase ddb and get his created id        
+        galleryStore.uploadFile($file, createdId).then(
+          (res)=>{
+            this.uploadState = res                      // State uploading
+          }
+        )         
       })
+
+    // -- Dialog box rendering -- //
+    this.$refs.uploading.innerHTML = "Uploading..."     // Add content text on uploading state
+    // -- //
       
     },
     // -- //
@@ -82,15 +89,18 @@ export default {
     onPickFile(e){
       let files = e.target.files
       $file = files[0]
+      
       let nameFile = files[0].name
-      if (nameFile.lastIndexOf('.') <= 0 ){ return alert('Error ! Invalid file') }else{
+      if (nameFile.lastIndexOf('.') <= 0 ){ 
+        return alert('Error ! Invalid file') 
+      }else{
         
         this.file = nameFile 
-        console.log('File picked : '+this.file)
+        console.log('File picked : '+this.file)       
+        
       }
     }
     // -- //
-
 
 
   },
@@ -100,6 +110,7 @@ export default {
   }  
 
 }
+
 </script>
 
 <style>

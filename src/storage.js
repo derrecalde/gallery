@@ -1,17 +1,19 @@
 
 import { db, firebase } from './config';
+import { exists } from 'fs';
 
 class GalleryStorage {
   constructor(){
     this.state = {
       store : [],
-      name: 'paints'
+      collection: 'gallery',
+      uploadState: false
     }
   }
 
-  // Get gallery data from Firebase ddb
+  // -- Get gallery data from Firebase ddb -- //
   getGallery (){
-     db.collection(this.state.name).get().then( (snapshot)=>{     
+     db.collection(this.state.collection).get().then( (snapshot)=>{     
 
       snapshot.docs.forEach(item => {      
 
@@ -22,46 +24,59 @@ class GalleryStorage {
       });
     })      
   }
+  // -- //
 
-  // Add data in Firebase ddb
+
+  // -- Add data in Firebase ddb -- //
   addIn(el){    
 
-    this.state.store.push(el)              // Add in store to it instantly
+    this.state.store.push(el)              // Add in store to see it instantly
 
-    return db.collection(this.state.name).add(el).then( (data) => {     
+    return db.collection(this.state.collection).add(el).then( (data) => {     
         return data.id                     // return the created id         
       })
-
     
   }
+  // -- //
 
-  // Remove a data by id
+
+  // -- Remove a data by id -- //
   removeIn(id){
 
     // Remove from firebase    
-    db.collection(this.state.name).doc(id).delete();
+    db.collection(this.state.collection).doc(id).delete();
 
-    // -- Remove from the store -- //    
+    // Remove from the store to see it instantly
     let index = this.state.store.findIndex( x => x.id === id);    
     if (index > -1) this.state.store.splice(index, 1);    
-    // -- //    
-  }
-
-  uploadFile(file, createdId){    
     
-    let fileName = file.name
-    let ext      = fileName.slice( fileName.lastIndexOf('.') )
-        
-    // Add in firebase storage    
-    let storageRef = firebase.storage().ref()
-    let imagesRef  = storageRef.child('gallery/'+createdId+ext)
+  }
+  // -- //
 
-    imagesRef.put(file).then(function(snapshot) {
-      console.log(file)
-      console.log('Uploaded !');
+  // -- Uploading file in Firebase Storage -- //
+  async uploadFile(file, createdId){    
+             
+    let fileName    = file.name
+    let ext         = fileName.slice( fileName.lastIndexOf('.') )    
+    
+   // -- Add Original file in firebase storage -- //
+    let storageRef  = firebase.storage().ref()
+    let imagesRef   = storageRef.child('gallery/'+createdId+ext)    
+
+    let uploadState = await imagesRef.put(file).then( function(snapshot) {      
+      console.log('Uploaded !');     
+      return true 
+    }).catch( (error) => {
+      console.log(error)
+      return false
     });
     
+    return uploadState;
+
+    // -- //
+    
   }
+  // -- //
 
 }
 
