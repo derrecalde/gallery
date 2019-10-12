@@ -6,56 +6,49 @@ class GalleryStorage {
   constructor(){
     this.state = {
       store : [],
-      images: [],
       collection: 'gallery',
       uploadState: false
     }
   }
 
   // -- Get gallery data from Firebase ddb -- //
-  getGallery (){
-     db.collection(this.state.collection).get().then( (snapshot)=>{     
+  getGallery (){    
+    let datas = []       
 
-      snapshot.docs.forEach(item => {      
+     db.collection(this.state.collection).get().then(  (snapshot)=>{     
 
-        let data = item.data()
-        data.id  = item.id
+      snapshot.docs.forEach(item => {                             
+        // Set data names : values 
+        let data    = item.data()
+        data.id     = item.id        
 
-        this.state.store.push(data)        // Push each data in the state.paintings store
-      });
-    })
-          
+        this.state.store.push(data)        
+      });               
+    })   
+    
   }
   // -- //
 
-  async buildImages(){
-    
-    var storage = firebase.storage();    
-    var store   = this.state.store        
-        
-    store.forEach(element => { 
-      let urls = {}      
-      
-      storage.refFromURL('gs://'+config.storageBucket+'/gallery/'+element.id+'.jpg').getDownloadURL().then(
-        (res)=>{
-          urls.urlOrigin = res
-        }
-      )
 
-      storage.refFromURL('gs://'+config.storageBucket+'/gallery/resized/'+element.id+'_300x300.jpg').getDownloadURL().then(
-        (res)=>{          
-          urls.urlResized = res
-        }
-      )
-      
-      urls.id    = element.id         // Add the id
-      urls.title = element.title      // Add the title
-      urls.type  = element.type       // Add the title
-      this.state.images.push(urls)    // Add urls
-      
-    })        
-   
+
+  async getAnImg(fileName, path){
+
+    let storage = firebase.storage();   // Init Ref Storage
+
+    // Get url from Firebase Storage with promise
+    let promise = new Promise((resolve, reject) => {
+      storage.refFromURL('gs://'+config.storageBucket+'/'+path+'/'+fileName+'.jpg').getDownloadURL().then(
+          (res)=>{          
+            resolve(res)
+          }
+        )
+    });
+
+    let url = await promise        // Return url
+    return url
+
   }
+
 
   // -- Add data in Firebase ddb -- //
   addIn(el){    
@@ -108,7 +101,7 @@ class GalleryStorage {
   }
   // -- //
 
-  
+
   // -- Uploading file in Firebase Storage -- //
   async uploadFile(file, createdId){    
              
@@ -133,6 +126,7 @@ class GalleryStorage {
     
   }
   // -- //
+  
 
 }
 
@@ -140,8 +134,6 @@ class GalleryStorage {
 // Init a storage
 export const galleryStore = new GalleryStorage();
 
-// Get data from firebase
 galleryStore.getGallery()
-
 // console.log(paints.getPaints())
 // console.log(paints.state)
