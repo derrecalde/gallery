@@ -6,13 +6,17 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "build": "node build/build.js"
+    "start": "npm run dev & npm run watch:sass",
+    "build": "node build/build.js",
+    "build:sass": "node-sass --output-style compressed -o ./src/ ./src/sass/App.scss",
+    "watch:sass": "onchange './src/sass/**/*.scss' -- npm run build:sass"
   },
-  "dependencies": {    
+  "dependencies": {
     "firebase": "^7.1.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "node-sass": "^3.7.0",
+    "onchange": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

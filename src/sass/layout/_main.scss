@@ -1,0 +1,52 @@
+/* ------------------------
+// Set mains styles */
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-size: $base__font-size * 1px;
+  font-family: $text__family-sans;
+  height: 100%;
+  width: 100%;
+  background-color: $color__primary;  
+}
+
+h1 {
+  font-size: em(30);
+}
+
+h2 {
+  font-size: em(25); 
+}
+
+/* End mains styles
+------------------------ */
+
+.body {
+  position: relative;
+}
+
+.body > .svg__intro, .body > .gallery  {
+  @include transition(max-height 0.4s);
+  max-height: em(1500);
+}
+
+
+
+/* ------------------------
+// Set states animations */
+.state--close{
+  animation: close--container 400ms ease-in-out both;
+  transform-origin: top;
+}
+
+.state--open{
+  animation: open--container 400ms ease-in-out both;
+  transform-origin: top;
+}
+
+.no--height{
+  max-height: 0 !important;
+}
+/* End states animations
+------------------------ */

@@ -1,0 +1,72 @@
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Button : Bounce animation scale 1 to scale 1.2
+ * ----------------- */
+
+@keyframes Gallery__button--bounce 
+{
+  // from src = http://bouncejs.com/
+
+  0% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  2.7% { transform: matrix3d(1.175, 0, 0, 0, 0, 1.175, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  5.31% { transform: matrix3d(1.22, 0, 0, 0, 0, 1.22, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  9.51% { transform: matrix3d(1.153, 0, 0, 0, 0, 1.153, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  13.71% { transform: matrix3d(1.05, 0, 0, 0, 0, 1.05, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  17.92% { transform: matrix3d(0.987, 0, 0, 0, 0, 0.987, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  22.02% { transform: matrix3d(0.971, 0, 0, 0, 0, 0.971, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  30.33% { transform: matrix3d(0.993, 0, 0, 0, 0, 0.993, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  38.64% { transform: matrix3d(1.004, 0, 0, 0, 0, 1.004, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  55.36% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  72.07% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  88.69% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+
+/* End button
+ * ----------------- */
+
+
+
+
+/* Container animations
+ * ----------------- */
+@keyframes close--container
+{
+  0%{
+    transform: translate(0%, 0%);   
+    opacity: 1;
+  }
+  100%{
+    transform: translate(-200%, 0%);      
+    opacity: 0;
+  }
+}
+
+@keyframes open--container
+{
+  0%{
+    transform: translate(-200%, 0%);      
+    opacity: 0;
+  }
+  100%{
+    transform: translate(0%, 0%);   
+    opacity: 1;
+  }
+}
+/* End container animations
+ * ----------------- */
+
+
+
+
+
+
