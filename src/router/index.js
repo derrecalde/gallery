@@ -6,6 +6,7 @@ import { firebase } from '@/config'
 import Login from '@/views/Login.vue'
 import Home from '@/views/Home.vue'
 import Admin from '@/views/Admin.vue'
+import Details from '@/views/Details.vue'
 
 Vue.use(Router)
 
@@ -32,6 +33,12 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/details/:img',
+      name: 'Details',
+      component: Details,
+      props: true
     }
   ]
 })

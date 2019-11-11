@@ -2,7 +2,7 @@
 
   <div id="gallery">        
     
-    <section v-for="img of gallery" :key="img.id" >            
+    <section v-for="(img, index) of gallery" :key="img.id" @click="seeDetails(index)" >            
       <img v-if="img.id" :ref="'image_'+img.id" :v-model="getImgById(img.id)" src="" :alt="img.title">
       <h1>{{img.title}}</h1>
       <p>{{img.type}}</p>
@@ -44,7 +44,12 @@ export default {
       
       // Update src values's img once promise is resolved
       let url = await promise         
-      this.$refs['image_'+imgId][0].src = url     // Rewrite url in src element
+      this.$refs['image_'+imgId][0].src = url  // Rewrite url in src element
+    },
+
+    seeDetails(img){
+      // Get Id img in details view
+      this.$router.replace('/details/'+img);
     }
   }
   
