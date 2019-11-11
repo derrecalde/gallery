@@ -25,9 +25,11 @@ ul li{
   list-style: none;
 }
 
+a {
+  text-decoration: none;  
+}
+
 button:focus, input:focus{
   outline-style:none;
   box-shadow:none;
 }
-
- 

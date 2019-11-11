@@ -11,12 +11,60 @@ html, body {
   background-color: $color__primary;  
 }
 
+b{
+  font-weight: bold;
+}
+
+a {
+  color: $text__color--base;  
+  @include transition(all 0.4s);
+
+  &:hover{        
+
+    &::after{
+      background-color:$text__color--base;
+      width: 100%;      
+    }
+  }
+
+  &::after{
+    content:'';
+    @include transition(width 0.3s);
+    display:block;
+    position: relative;
+    width: 0%;
+    height: 1px;
+    background-color:$text__color--base;
+  }
+}
+
 h1 {
   font-size: em(30);
+  padding: 1em 0;
 }
 
 h2 {
   font-size: em(25); 
+  padding: 1em 0;
+}
+
+input{
+  padding: 0.7em;
+  color: $text__color--base;
+}
+
+button {
+  background-color: $color__primary--middle;
+  padding: 0.75em;
+  color: $color__primary--light;
+  @include border-radius(5px);
+  cursor: pointer;
+  font-size: 1em;
+
+  &:hover{
+    background-color: $color__primary--light;
+    color:$color__primary--middle;
+  }
 }
 
 /* End mains styles
@@ -26,25 +74,10 @@ h2 {
   position: relative;
 }
 
-.body > .svg__intro, .body > .gallery  {
-  @include transition(max-height 0.4s);
-  max-height: em(1500);
-}
-
 
 
 /* ------------------------
 // Set states animations */
-.state--close{
-  animation: close--container 400ms ease-in-out both;
-  transform-origin: top;
-}
-
-.state--open{
-  animation: open--container 400ms ease-in-out both;
-  transform-origin: top;
-}
-
 .no--height{
   max-height: 0 !important;
 }

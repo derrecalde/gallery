@@ -1,0 +1,33 @@
+/* ------------------------
+// Set Head styles */
+#admin{
+  display: flex;
+  justify-content: center;
+
+  li{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .uploading{
+    padding: 1em 0;
+    text-align: center;
+    color: $text__color--base;
+  }
+}
+
+#logout{
+  position: absolute;
+  top: 6em;
+  right: 1em;
+}
+/* End
+------------------------ */
+ 
+
+
+/* ------------------------
+// Set responsive */
+
+/* End responsive
+------------------------ */

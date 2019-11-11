@@ -21,9 +21,3 @@ export default {
 }
 </script>
 
-<style>
-#home {  
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -1,9 +1,11 @@
 <template>
   <div id="login">
-    <h1>Hello !</h1>
-    <input type="text" v-model="email" placeholder="Email" />
-    <input type="password" v-model="password" placeholder="Password" />
-    <button @click="login" @keyup.enter="login" >Connection</button>        
+    <section>
+      <h1>Hello !</h1>
+      <input type="text" v-model="email" placeholder="Email" />
+      <input type="password" v-model="password" placeholder="Password" />
+      <button @click="login" @keyup.enter="login" >Connection</button>        
+    </section>
   </div>
 </template>
 

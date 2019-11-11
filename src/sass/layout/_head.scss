@@ -1,0 +1,48 @@
+/* ------------------------
+// Set Head styles */
+
+#nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around; 
+  align-content: center;
+  align-items: center;
+  background-color: $color__primary--middle;
+  padding: 1.5em 0;
+
+  a{
+    font-size: 1.4em;
+    color: $color__primary--darkest;    
+
+    &::after{
+      background-color: $color__primary--darkest;
+    }
+
+    &:hover{
+      transform: translate(-10%, 0%);
+    }
+  }
+}
+
+/* End
+------------------------ */
+ 
+
+
+/* ------------------------
+// Set responsive */
+.state--close{
+  animation: close--container 400ms ease-in-out both;
+  transform-origin: top;
+}
+
+.state--open{
+  animation: open--container 400ms ease-in-out both;
+  transform-origin: top;
+}
+
+.no--height{
+  max-height: 0 !important;
+}
+/* End responsive
+------------------------ */

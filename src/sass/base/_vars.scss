@@ -11,12 +11,6 @@ $text__size--beta     : 30 !default;
 $text__size--gamma    : 24 !default;
 $text__size--delta    : 15 !default;
 
-// Text colors
-$text__color--base    : #333333 !default;
-$text__color--alpha   : #990000 !default;
-$text__color--beta    : #990000 !default;
-$text__color--gamma   : #333333 !default;
-$text__color--delta   : #333333 !default; 
 
 // Colors
 $color__transparent        : rgba(0,0,0,0);
@@ -24,9 +18,18 @@ $color__transparent--light : rgba(0,0,0,0.15);
 $color__transparent--medium: rgba(0,0,0,0.30);
 $color__transparent--dark  : rgba(0,0,0,0.75);
 
-$color__primary       : #323136 !default;
-$color__primary--light: #DD0000 !default;
-$color__primary--dark : #990000 !default;
+$color__primary         : #f1e8e6 !default;
+$color__primary--light  : #edd2cb !default;
+$color__primary--middle : #f55951 !default;
+$color__primary--dark   : #543c52 !default;
+$color__primary--darkest: #361d32 !default;
 $color--white : #FFFFFF !default;
 $color--black : #000000 !default;
+
+// Text colors
+$text__color--base    : $color__primary--middle !default;
+$text__color--alpha   : #990000 !default;
+$text__color--beta    : #990000 !default;
+$text__color--gamma   : #333333 !default;
+$text__color--delta   : #333333 !default; 
 

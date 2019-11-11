@@ -1,12 +1,13 @@
 <template>
 
-  <div class="hello">        
+  <div id="gallery">        
     
-    <div v-for="img of gallery" :key="img.id" >
-      <p>{{img.title}}</p>
-      <p  ></p>            
+    <section v-for="img of gallery" :key="img.id" >            
       <img v-if="img.id" :ref="'image_'+img.id" :v-model="getImgById(img.id)" src="" :alt="img.title">
-    </div>
+      <h1>{{img.title}}</h1>
+      <p>{{img.type}}</p>
+    </section>
+
   </div>
 
 </template>
@@ -35,7 +36,7 @@ export default {
       // Wait url from Firebase Storage
       let promise = new Promise((resolve, reject) => {
 
-        galleryStore.getAnImg(imgId+'_300x300', 'gallery/resized').then(
+        galleryStore.getAnImg(imgId+'_300x700', 'gallery/resized').then(
         (res) => {
           resolve(res)  
         })

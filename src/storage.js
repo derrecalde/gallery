@@ -78,7 +78,7 @@ class GalleryStorage {
     // Get the firebase Storage bucket and file name
     let storageRef      = firebase.storage().ref()                                // Get the bucket storage
     let imageRef        = storageRef.child('gallery/'+id+ext)                     // Get the original file
-    let resizedImageRef = storageRef.child('gallery/resized/'+id+'_300x300'+ext)  // Get the resized file
+    let resizedImageRef = storageRef.child('gallery/resized/'+id+'_300x700'+ext)  // Get the resized file
     
     // Deleting
     // Delete the file

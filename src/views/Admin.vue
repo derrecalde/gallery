@@ -1,25 +1,26 @@
 <template>
   <div id="admin">
-    <h1>Admin !</h1>
-    <LogOut></LogOut> 
+    <section>
+      <h1>Admin</h1>
+      <LogOut></LogOut> 
 
-    <input type="text" v-model="title" placeholder="Title" />
-    <input type="text" v-model="type" placeholder="Type" />
-    <button @click="uploadFile" >Upload File</button>
-    <input type="file" ref="fileUploader" style="display:none;" accept="images/*" @change="onPickFile"  />    
-    <button @click="addFile" >Add</button>     
-    <p v-show="!uploadState" ref="uploading" ></p>
+      <button @click="uploadFile" >Choose File</button>
+      <input type="text" v-model="title" placeholder="Title" />
+      <input type="text" v-model="type" placeholder="Type" />
+      <input type="file" ref="fileUploader" style="display:none;" accept="images/*" @change="onPickFile"  />    
+      <button @click="addFile" >Send</button>  
+      <p v-show="!uploadState" ref="uploading" class="uploading" ></p>
 
-    <hr/>
+      <hr/>
 
-    <ul>
-      <li v-for="img in gallery" :key="img.id" >
-        {{ img.title }}                
-        <button :data-id="img.id" @click="removeFile" >x</button>                
-      </li>
-    </ul>    
+      <ul>
+        <li v-for="img in gallery" :key="img.id" >
+          <span><b>{{ img.title }}</b> : {{img.type}}</span>                        
+          <button :data-id="img.id" @click="removeFile" >x</button>                
+        </li>
+      </ul>    
 
-
+    </section>
   </div>
 </template>
 
